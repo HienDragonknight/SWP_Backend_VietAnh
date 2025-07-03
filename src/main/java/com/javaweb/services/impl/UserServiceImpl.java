@@ -245,7 +245,7 @@ public class UserServiceImpl implements UserService {
         tokenRepository.save(newToken);
 
         // 4. Gửi email
-        String resetLink = "http://localhost:8080/api/users/reset-password?token=" + token;
+        String resetLink = "http://localhost:3000/api/users/reset-password?token=" + token;
         String subject = "Reset Your Password";
         String content = "Hi " + user.getFullName() + ",\n\nClick the link below to reset your password:\n" + resetLink;
 
