@@ -57,4 +57,11 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Rating> ratings = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "Course_Topic",
+            joinColumns = @JoinColumn(name = "courseId"),
+            inverseJoinColumns = @JoinColumn(name = "topicId")
+    )
+    private List<TopicEntity> topics;
 }
