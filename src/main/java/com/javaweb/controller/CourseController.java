@@ -1,6 +1,6 @@
 package com.javaweb.controller;
 
-import com.javaweb.entities.Course;
+import com.javaweb.dtos.CourseDTO;
 import com.javaweb.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,24 +19,24 @@ public class CourseController {
 
     // Danh sách khóa học (có phân trang)
     @GetMapping
-    public ResponseEntity<Page<Course>> getAllCourses(
+    public ResponseEntity<Page<CourseDTO>> getAllCourses(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(courseService.getAllCourses(pageable));
+        return ResponseEntity.ok(courseService.getAllCoursesDTO(pageable));
     }
 
     // Tìm kiếm / Lọc khóa học
     @GetMapping("/search")
-    public ResponseEntity<Page<Course>> searchCourses(
+    public ResponseEntity<Page<CourseDTO>> searchCourses(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) Boolean status,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return ResponseEntity.ok(courseService.searchCourses(keyword, status, pageable));
+        return ResponseEntity.ok(courseService.searchCoursesDTO(keyword, status, pageable));
     }
 
     // Xem chi tiết khóa học
